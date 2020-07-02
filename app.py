@@ -4,7 +4,7 @@ import requests
 import matplotlib.pyplot as plt
 import numpy as np
 
-URI = 'https://github.com/pratikyadav33/Neural-Network-Visualizer/blob/master/ml_server.py'
+URI = 'http://32c6825dc4dd.ngrok.io/'
 
 st.title('NN visualizer')
 st.sidebar.markdown('## Input Image')
