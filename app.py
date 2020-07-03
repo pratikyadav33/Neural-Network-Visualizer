@@ -4,19 +4,22 @@ import requests
 import matplotlib.pyplot as plt
 import numpy as np
 
-URI = 'http://32c6825dc4dd.ngrok.io/'
 
-st.title('NN visualizer')
+URI = 'http://bf31721516e3.ngrok.io/'
+
+st.title('Neural Network visualizer')
+st.text('Black node = High Probability  &&  White Node = Low Probability')
 st.sidebar.markdown('## Input Image')
 
 if st.button('Get random prediction'):
-    response = request.post(URI,data={})
+    response = requests.post(URI,data={})
     response=json.loads(response.text)
     preds = response.get('prediction')
     image= response.get('image')
-    iamge = np.reshape(image,(28*28))
+    image = np.reshape(image,(28,28))
     
-    st.sidebar.image(image,width=150)
+
+    st.sidebar.image(image,width =150)
     for layer,p in enumerate(preds):
         numbers = np.squeeze(np.array(p))
         plt.figure(figsize=(32,4))
@@ -29,11 +32,11 @@ if st.button('Get random prediction'):
         for i , number in enumerate(numbers):
             plt.subplot(row,col,i+1)
             plt.imshow(number*np.ones((8,8,4)).astype('float32'))
-            pt.xticks([])
+            plt.xticks([])
             plt.yticks([])
             if layer == 2:
                 plt.xlabel(str(i),fontsize=40)
         plt.subplots_adjust(wspace=0.05,hspace=0.05)
         plt.tight_layout()
-        st.test('Layer{}'.foramt(i+1))
+        st.text('Layer{}'.format(layer+1))
         st.pyplot()
